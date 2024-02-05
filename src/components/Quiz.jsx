@@ -1,48 +1,56 @@
-import React, { useCallback, useState } from 'react';
-import questions from '../assets/questions';
-import QuizComplete from './QuizComplete';
-import QuestionTimer from './QuestionTimer';
+import React, { useCallback, useRef, useState } from "react";
+import questions from "../assets/questions";
+import QuizComplete from "./QuizComplete";
+import QuestionTimer from "./QuestionTimer";
+import Answers from "./Answers";
+import Question from "./Question";
 
 const Quiz = () => {
-  // Handle answers 
+  // Handle answers
   const [selectedAns, setSelectedAns] = useState([]);
+  const [ansState, setAnsState] = useState("");
 
   // Derive the index of the next question
-  const activeQues = selectedAns.length;
+  const activeQues =
+    ansState === "" ? selectedAns.length : selectedAns.length - 1;
 
   // Check if the quiz is complete
   const quizComp = activeQues === questions.length;
 
-  // Create a shuffled copy of answers only if the quiz is not complete
-  const shuffledAns = !quizComp
-    ? [...questions[activeQues]?.answers].sort(() => Math.random() - 0.5)
-    : [];
-
-  const handleClick = useCallback((ans) => {
-    setSelectedAns((prevAns) => [...prevAns, ans]);
-  },[])
+  const handleClick = useCallback(
+    (ans) => {
+      setAnsState("answered");
+      setSelectedAns((prevAns) => [...prevAns, ans]);
+      setTimeout(() => {
+        if (ans === questions[activeQues].answers[0]) setAnsState("correct");
+        else setAnsState("wrong");
+        setTimeout(() => {
+          setAnsState("");
+        }, [2000]);
+      }, [1000]);
+    },
+    [activeQues]
+  );
 
   console.log(selectedAns);
-const handleTimer=useCallback((()=>handleClick(null)),[handleClick])
-
+  const handleTimer = useCallback(() => handleClick(null), [handleClick]);
 
   return (
     <div id="quiz">
       {quizComp ? (
         <QuizComplete />
       ) : (
-        <div id="question">
-          {/* key is used to make new copy of the component everytime to reset the timer for every question */}
-         {<QuestionTimer key={activeQues}  timeout={10000} onTimeout={handleTimer}/>} 
-          <h1>{questions[activeQues]?.text}</h1>
-          <ul id="answers">
-            {shuffledAns.map((ans) => (
-              <li key={ans} className='answer'>
-                <button onClick={() => handleClick(ans)}>{ans}</button>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <Question
+          quesText={questions[activeQues]?.text}
+          selectedAns={selectedAns[selectedAns.length - 1]}
+          ansState={ansState}
+          handleClick={handleClick}
+          answers={questions[activeQues].answers}
+          key={activeQues}
+          quizComp={quizComp}
+          handleTimer={handleTimer}
+          index={questions[activeQues]?.text}
+        />
       )}
     </div>
   );
