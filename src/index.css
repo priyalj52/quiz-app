@@ -82,7 +82,7 @@ header h1 {
   max-width: 50rem;
   margin: auto;
   padding: 2rem;
-  background: linear-gradient(180deg, #34602a 0%, #3b6110 100%);
+  /* background: linear-gradient(180deg, #34602a 0%, #3b6110 100%); */
   border-radius: 8px;
   /* box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.6); */
   box-shadow: 1px 1px 8px 4px rgba(12, 5, 32, 0.6);
@@ -124,7 +124,7 @@ header h1 {
 }
 
 #question progress.answered::-webkit-progress-bar {
-  background: #6a558a;
+  background: #1dc72e;
 }
 
 #question h2 {
@@ -212,7 +212,7 @@ header h1 {
   max-width: 40rem;
   margin: 2rem auto;
   padding: 2rem;
-  background: linear-gradient(180deg, #7eda90 0%, #88c45f 100%);
+  background: linear-gradient(180deg, #32f458 0%, #6ed02d 100%);
   color: #69d04d;
   border-radius: 8px;
   box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.6);
@@ -238,7 +238,7 @@ header h1 {
   text-align: center;
   margin: 0;
   text-transform: uppercase;
-  color: #235335;
+  color: #2d3d20;
 }
 
 #summary ol {
@@ -253,14 +253,14 @@ header h1 {
 }
 
 #summary h3 {
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: "Roboto ", sans-serif;
   font-size: 1rem;
   margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #2c203d;
-  color: #d8cde8;
+  background: #2d3d20;
+  color: #cee8cd;
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
@@ -269,26 +269,26 @@ header h1 {
 #summary .question {
   margin: 0.25rem 0;
   font-size: 1rem;
-  color: #2c3a27;
+  color: #474947;
 }
 
 #summary .user-answer {
   margin: 0.25rem 0;
   font-family: "Roboto Condensed", sans-serif;
   font-weight: bold;
-  color: #251e2f;
+  color: #2f2f1e;
 }
 
 #summary .user-answer.correct {
-  color: #054e37;
+  color: #109b0d;
 }
 
 #summary .user-answer.wrong {
-  color: #730b4b;
+  color: #f00909;
 }
 
 #summary .user-answer.skipped {
-  color: #d1baf2;
+  color: #dae235;
   font-weight: normal;
 }
 
@@ -311,7 +311,8 @@ header h1 {
 #summary-stats .number {
   font-family: "Roboto Condensed", sans-serif;
   font-size: 3rem;
-  color: #594276;
+  font-weight: bold;
+  color: #2d3d20;
 }
 
 #summary-stats .text {

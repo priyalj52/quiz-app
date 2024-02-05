@@ -21,7 +21,7 @@ const Answers = ({ answers, selectedAns, ansState, handleClick, quizComp }) => {
 
         return (
           <li key={ans} className="answer">
-            <button onClick={() => handleClick(ans)} className={css}>
+            <button onClick={() => handleClick(ans)} className={css} disabled={ansState!==''}>
               {ans}
             </button>
           </li>

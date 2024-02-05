@@ -8,28 +8,20 @@ import Question from "./Question";
 const Quiz = () => {
   // Handle answers
   const [selectedAns, setSelectedAns] = useState([]);
-  const [ansState, setAnsState] = useState("");
+
 
   // Derive the index of the next question
-  const activeQues =
-    ansState === "" ? selectedAns.length : selectedAns.length - 1;
+  const activeQues = selectedAns.length 
 
   // Check if the quiz is complete
   const quizComp = activeQues === questions.length;
 
   const handleClick = useCallback(
     (ans) => {
-      setAnsState("answered");
+      // setAnsState("answered");
       setSelectedAns((prevAns) => [...prevAns, ans]);
-      setTimeout(() => {
-        if (ans === questions[activeQues].answers[0]) setAnsState("correct");
-        else setAnsState("wrong");
-        setTimeout(() => {
-          setAnsState("");
-        }, [2000]);
-      }, [1000]);
     },
-    [activeQues]
+    []
   );
 
   console.log(selectedAns);
@@ -38,18 +30,16 @@ const Quiz = () => {
   return (
     <div id="quiz">
       {quizComp ? (
-        <QuizComplete />
+        <QuizComplete Answers={selectedAns} />
       ) : (
         <Question
-          quesText={questions[activeQues]?.text}
-          selectedAns={selectedAns[selectedAns.length - 1]}
-          ansState={ansState}
+         
           handleClick={handleClick}
-          answers={questions[activeQues].answers}
+        
           key={activeQues}
           quizComp={quizComp}
           handleTimer={handleTimer}
-          index={questions[activeQues]?.text}
+          index={activeQues}
         />
       )}
     </div>
